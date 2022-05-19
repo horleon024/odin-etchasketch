@@ -1,3 +1,11 @@
+function changeBackgroundColor(event) {
+	event.target.style["background-color"] = "blue";
+}
+
+function resetBackgroundColor(event) {
+	event.target.style["background-color"] = "purple";
+}
+
 const container = document.querySelector(".container");
 
 for (let i = 0; i < 16; i++) {
@@ -12,3 +20,8 @@ for (let i = 0; i < 16; i++) {
 	}
 	container.appendChild(row);
 }
+
+const squares = document.querySelectorAll(".square");
+
+//squares.forEach(square => square.addEventListener('mouseenter', changeBackgroundColor));
+squares.forEach(square => square.addEventListener('mouseover', resetBackgroundColor));
