@@ -6,22 +6,43 @@ function resetBackgroundColor(event) {
 	event.target.style["background-color"] = "purple";
 }
 
-const container = document.querySelector(".container");
+function cleanGrid() {
+	let row = container.lastElementChild;
 
-for (let i = 0; i < 16; i++) {
-	const row = document.createElement("div");
-	row.classList.add("row");
-	for (let j = 0; j < 16; j++) {
-		const square = document.createElement("div");
-		if (i >= 1) square.style["border-top"] = 0;
-		if (j >= 1) square.style["border-left"] = 0;
-		square.classList.add("square");
-		row.appendChild(square);
+	while (row) {
+		container.removeChild(row);
+		row = container.lastElementChild;
 	}
-	container.appendChild(row);
 }
 
-const squares = document.querySelectorAll(".square");
+function createGrid(size) {
 
-//squares.forEach(square => square.addEventListener('mouseenter', changeBackgroundColor));
-squares.forEach(square => square.addEventListener('mouseover', resetBackgroundColor));
+	for (let i = 0; i < size; i++) {
+		const row = document.createElement("div");
+		row.classList.add("row");
+		for (let j = 0; j < size; j++) {
+			const square = document.createElement("div");
+			if (i >= 1) square.style["border-top"] = 0;
+			if (j >= 1) square.style["border-left"] = 0;
+			square.style.width = `${800 / size}px`;
+			square.style.height = `${800 / size}px`;
+			square.classList.add("square");
+			square.addEventListener('mouseenter', changeBackgroundColor);
+			row.appendChild(square);
+		}
+		container.appendChild(row);
+	}
+}
+
+function promptUser(event) {
+	const newSize = prompt("Enter the size of the new grid(max. 100)");
+	cleanGrid();
+	createGrid(newSize);
+}
+
+const container = document.querySelector(".container");
+const newGridButton = document.querySelector(".newGridButton");
+
+newGridButton.addEventListener('click', promptUser);
+
+
