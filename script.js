@@ -1,9 +1,8 @@
 function changeBackgroundColor(event) {
-	event.target.style["background-color"] = "blue";
-}
-
-function resetBackgroundColor(event) {
-	event.target.style["background-color"] = "purple";
+	const r = Math.floor(Math.random() * 256);
+	const g = Math.floor(Math.random() * 256);
+	const b = Math.floor(Math.random() * 256);
+	event.target.style["background-color"] = `rgb(${r},${g},${b})`;
 }
 
 function cleanGrid() {
@@ -24,8 +23,8 @@ function createGrid(size) {
 			const square = document.createElement("div");
 			if (i >= 1) square.style["border-top"] = 0;
 			if (j >= 1) square.style["border-left"] = 0;
-			square.style.width = `${800 / size}px`;
-			square.style.height = `${800 / size}px`;
+			square.style.width = `${800 / size - 1}px`;
+			square.style.height = `${800 / size - 1}px`;
 			square.classList.add("square");
 			square.addEventListener('mouseenter', changeBackgroundColor);
 			row.appendChild(square);
