@@ -34,7 +34,9 @@ function createGrid(size) {
 }
 
 function promptUser(event) {
-	const newSize = prompt("Enter the size of the new grid(max. 100)");
+	let newSize = parseInt(prompt("Enter the size of the new grid(max.: 100, default: 16)"));
+	console.log(newSize);
+	if (newSize > 100 || newSize < 1 || isNaN(newSize)) newSize = 16;
 	cleanGrid();
 	createGrid(newSize);
 }
